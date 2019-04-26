@@ -1,0 +1,4 @@
+syntax: glob
+*.log
+bin/
+dev.ini
