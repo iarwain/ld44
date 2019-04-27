@@ -4,15 +4,12 @@
 //! Includes
 #define __NO_SCROLLED__ // Uncomment this define to prevent the embedded editor (ScrollEd) from being compiled
 #include "Scroll.h"
-
+#include "tetro.h"
 
 //! LD44
 class LD44 : public Scroll<LD44>
 {
 public:
-
-                ScrollObject *  GetRunTimeObject(const orxSTRING _zObjectName) const;
-                void            DeleteRunTimeObject(const orxSTRING _zObjectName);
 
 
 private:

@@ -164,6 +164,7 @@ ifeq ($(config),release32)
 endif
 
 OBJECTS := \
+	$(OBJDIR)/tetro.o \
 	$(OBJDIR)/ld44.o \
 
 RESOURCES := \
@@ -224,6 +225,10 @@ $(GCH): $(PCH)
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -x c++-header $(ALL_CXXFLAGS) -MMD -MP $(DEFINES) $(INCLUDES) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
 endif
+
+$(OBJDIR)/tetro.o: ../../../src/tetro.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
 $(OBJDIR)/ld44.o: ../../../src/ld44.cpp
 	@echo $(notdir $<)

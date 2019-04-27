@@ -1,5 +1,5 @@
 /**
- * @file ld44.cpp
+ * @file LD44.cpp
  * @date 26-Apr-2019
  */
 #define __SCROLL_IMPL__
@@ -59,6 +59,7 @@ void LD44::Exit()
 void LD44::BindObjects()
 {
   // Binds objects
+  ScrollBindObject<Tetro>("Tetro");
 }
 
 int main(int argc, char **argv)
