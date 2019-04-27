@@ -232,6 +232,8 @@ project "ld44"
         "../include/**.h",
         "../data/config/**.ini"
     }
+    includedirs {"../include"}
+    includedirs {"../include/Scroll"}
 
     configuration {"windows", "vs*"}
         buildoptions {"/EHsc"}
