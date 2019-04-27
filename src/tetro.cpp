@@ -7,6 +7,11 @@ void Tetro::OnCreate()
   orxVECTOR vOffset, vPos;
   orxCOLOR stColor;
 
+  // Sets as current tetromino
+  orxConfig_PushSection("Runtime");
+  orxConfig_SetString("Tetro", GetModelName());
+  orxConfig_PopSection();
+
   // Sets our start pos
   orxVector_Mul(&vPos, orxConfig_GetVector("SpawnOffset", &vPos), orxConfig_GetVector("BlockSize", &vOffset));
   SetPosition(vPos);
@@ -14,12 +19,11 @@ void Tetro::OnCreate()
   // For all blocks
   for(orxS32 i = 0; i < orxConfig_GetListCount("TetroPosList"); i++)
   {
-    orxVECTOR     vPos;
-    ScrollObject *poBlock;
+    orxVECTOR vPos;
+    Block    *poBlock;
 
     // Creates it
-    orxConfig_SetParent("TetroBlock", GetModelName());
-    poBlock = LD44::GetInstance().CreateObject("TetroBlock");
+    poBlock = LD44::GetInstance().CreateObject<Block>("TetroBlock");
 
     // Sets as owner/parent
     orxObject_SetOwner(poBlock->GetOrxObject(), GetOrxObject());
@@ -34,7 +38,7 @@ void Tetro::OnCreate()
   }
 
   // Sets rotation
-  s32Rotation = orxConfig_GetS32("RotationList");
+  s32Rotation = orxConfig_GetS32("InitRotation");
 
   // Moves
   Move(orxVECTOR_0, 0);
@@ -59,7 +63,7 @@ void Tetro::Land()
   }
 
   // Adds land track
-  AddTrack("TetrominoLand");
+  AddTrack("LandTrack");
 }
 
 void Tetro::Transform(const orxVECTOR &_rvPos, orxS32 _s32Rotation)

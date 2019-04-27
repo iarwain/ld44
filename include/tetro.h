@@ -22,4 +22,11 @@ public:
   orxS32                  s32Rotation;
 };
 
+class Block : public ScrollObject
+{
+private:
+  void                    OnCreate() {}
+  void                    OnDelete() {}
+};
+
 #endif // __TETRO_H__

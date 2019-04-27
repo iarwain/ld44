@@ -32,7 +32,7 @@ public:
                 orxU64          GetGridValue(orxS32 _s32X, orxS32 _s32Y) const;
                 void            SetGridValue(orxS32 _s32X, orxS32 _s32Y, orxU64 _u64Value);
                 void            GetGridSize(orxS32 &_rs32Width, orxS32 &_rs32Height) const;
-                void            CleanGridLine(orxS32 _s32Line);
+                void            ClearGridLine(orxS32 _s32Line);
 
 
 private:
@@ -53,7 +53,9 @@ private:
 private:
                 GameState       meGameState;
                 orxFLOAT        mfTime;
-                orxU64          *mau64Grid;
+                orxU64         *mau64Grid;
+                ScrollObject   *mpoScene;
+                Tetro          *mpoSelection;
                 orxS32          ms32GridWidth, ms32GridHeight;
                 orxFLOAT        mfFallTime;
                 orxFLOAT        mfLeftTime, mfRightTime;
