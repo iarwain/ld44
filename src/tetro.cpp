@@ -50,16 +50,16 @@ void Tetro::OnDelete()
 
 void Tetro::Land()
 {
-  orxOBJECT *pstChild;
+  ScrollObject *poChild;
 
   // Removes all children
-  while((pstChild = orxObject_GetOwnedChild(GetOrxObject())) != orxNULL)
+  while(poChild = GetOwnedChild())
   {
-    orxObject_SetOwner(pstChild, orxNULL);
+    orxObject_SetOwner(poChild->GetOrxObject(), orxNULL);
   }
 
   // Adds land track
-  orxObject_AddTimeLineTrack(GetOrxObject(), "TetrominoLand");
+  AddTrack("TetrominoLand");
 }
 
 void Tetro::Transform(const orxVECTOR &_rvPos, orxS32 _s32Rotation)
@@ -89,29 +89,25 @@ void Tetro::Transform(const orxVECTOR &_rvPos, orxS32 _s32Rotation)
   PopConfigSection();
 }
 
-orxBOOL Tetro::IsValid(const orxVECTOR &_rvPos, orxS32 _s32Rotation) const
+orxBOOL Tetro::IsValid() const
 {
-  orxVECTOR vPos;
-  orxU64    u64GUID;
-  orxS32    i = 0;
-  orxBOOL   bResult = orxTRUE;
+  orxU64  u64GUID;
+  orxS32  i = 0;
+  orxBOOL bResult = orxTRUE;
 
   // Gets our GUID
   u64GUID = GetGUID();
 
-  // Transforms
-  const_cast<Tetro *>(this)->Transform(_rvPos, _s32Rotation);
-
   // For all children
-  for(orxOBJECT *pstChild = orxObject_GetOwnedChild(GetOrxObject());
-      pstChild != orxNULL;
-      pstChild = orxObject_GetOwnedSibling(pstChild), i++)
+  for(ScrollObject *poChild = GetOwnedChild();
+      poChild;
+      poChild = poChild->GetOwnedSibling(), i++)
   {
     orxVECTOR vPos;
     orxS32    s32X, s32Y;
 
     // Gets its position
-    orxObject_GetWorldPosition(pstChild, &vPos);
+    poChild->GetPosition(vPos, orxTRUE);
 
     // Gets its grid index
     if(LD44::GetInstance().GetGridPosition(vPos, s32X, s32Y) != orxSTATUS_FAILURE)
@@ -138,9 +134,6 @@ orxBOOL Tetro::IsValid(const orxVECTOR &_rvPos, orxS32 _s32Rotation) const
       break;
     }
   }
-
-  // Transforms back
-  const_cast<Tetro *>(this)->Transform(*orxVector_Mulf(&vPos, &_rvPos, -orxFLOAT_1), -_s32Rotation);
 
   // Done!
   return bResult;
@@ -172,15 +165,15 @@ void Tetro::Validate()
   }
 
   // For all children
-  for(orxOBJECT *pstChild = orxObject_GetOwnedChild(GetOrxObject());
-      pstChild != orxNULL;
-      pstChild = orxObject_GetOwnedSibling(pstChild))
+  for(ScrollObject *poChild = GetOwnedChild();
+      poChild;
+      poChild = poChild->GetOwnedSibling())
   {
     orxVECTOR vPos;
     orxS32    s32X, s32Y;
 
     // Gets its position
-    orxObject_GetWorldPosition(pstChild, &vPos);
+    poChild->GetPosition(vPos, orxTRUE);
 
     // Gets its grid position
     if(LD44::GetInstance().GetGridPosition(vPos, s32X, s32Y) != orxSTATUS_FAILURE)
@@ -195,14 +188,21 @@ orxBOOL Tetro::Move(const orxVECTOR &_rvPos, orxS32 _s32Rotation)
 {
   orxBOOL bResult;
 
-  // Valid?
-  if((bResult = IsValid(_rvPos, _s32Rotation)) != orxFALSE)
-  {
-    // Transforms
-    Transform(_rvPos, _s32Rotation);
+  // Transforms
+  Transform(_rvPos, _s32Rotation);
 
+  // Valid?
+  if(bResult = IsValid())
+  {
     // Validate
     Validate();
+  }
+  else
+  {
+    orxVECTOR vPos;
+
+    // Transforms back
+    Transform(*orxVector_Mulf(&vPos, &_rvPos, -orxFLOAT_1), -_s32Rotation);
   }
 
   // Done!

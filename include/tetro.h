@@ -11,7 +11,7 @@ private:
   void                    OnDelete();
   void                    Update(const orxCLOCK_INFO &_rstInfo);
 
-  orxBOOL                 IsValid(const orxVECTOR &_rvPos, orxS32 _s32Rotation) const;
+  orxBOOL                 IsValid() const;
   void                    Validate();
   void                    Transform(const orxVECTOR &_rvPos, orxS32 _s32Rotation);
 
