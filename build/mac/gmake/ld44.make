@@ -24,12 +24,12 @@ ifeq ($(config),debug64)
   TARGETDIR  = ../../../bin
   TARGET     = $(TARGETDIR)/ld44d
   DEFINES   += -D__orxDEBUG__
-  INCLUDES  += -I../../../../orx/code/include
+  INCLUDES  += -I/Users/rom/workspace/orx/code/include -I../../../include -I../../../include/Scroll
   ALL_CPPFLAGS  += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS    += $(CFLAGS) $(ALL_CPPFLAGS) -ffast-math -g -msse2 -m64 -mmacosx-version-min=10.9 -stdlib=libc++ -gdwarf-2 -Wno-write-strings
   ALL_CXXFLAGS  += $(CXXFLAGS) $(ALL_CFLAGS) -fno-exceptions
   ALL_RESFLAGS  += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  ALL_LDFLAGS   += $(LDFLAGS) -L../../../../orx/code/lib/dynamic -L. -m64 -L/usr/lib64 -mmacosx-version-min=10.9 -stdlib=libc++ -dead_strip
+  ALL_LDFLAGS   += $(LDFLAGS) -L/Users/rom/workspace/orx/code/lib/dynamic -L. -m64 -L/usr/lib64 -mmacosx-version-min=10.9 -stdlib=libc++ -dead_strip
   LIBS      += -lorxd -framework Foundation -framework AppKit
   LDDEPS    +=
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -48,12 +48,12 @@ ifeq ($(config),profile64)
   TARGETDIR  = ../../../bin
   TARGET     = $(TARGETDIR)/ld44p
   DEFINES   += -D__orxPROFILER__
-  INCLUDES  += -I../../../../orx/code/include
+  INCLUDES  += -I/Users/rom/workspace/orx/code/include -I../../../include -I../../../include/Scroll
   ALL_CPPFLAGS  += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS    += $(CFLAGS) $(ALL_CPPFLAGS) -ffast-math -g -msse2 -O2 -m64 -mmacosx-version-min=10.9 -stdlib=libc++ -gdwarf-2 -Wno-write-strings
   ALL_CXXFLAGS  += $(CXXFLAGS) $(ALL_CFLAGS) -fno-exceptions -fno-rtti
   ALL_RESFLAGS  += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  ALL_LDFLAGS   += $(LDFLAGS) -L../../../../orx/code/lib/dynamic -L. -m64 -L/usr/lib64 -mmacosx-version-min=10.9 -stdlib=libc++ -dead_strip
+  ALL_LDFLAGS   += $(LDFLAGS) -L/Users/rom/workspace/orx/code/lib/dynamic -L. -m64 -L/usr/lib64 -mmacosx-version-min=10.9 -stdlib=libc++ -dead_strip
   LIBS      += -lorxp -framework Foundation -framework AppKit
   LDDEPS    +=
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -72,12 +72,12 @@ ifeq ($(config),release64)
   TARGETDIR  = ../../../bin
   TARGET     = $(TARGETDIR)/ld44
   DEFINES   +=
-  INCLUDES  += -I../../../../orx/code/include
+  INCLUDES  += -I/Users/rom/workspace/orx/code/include -I../../../include -I../../../include/Scroll
   ALL_CPPFLAGS  += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS    += $(CFLAGS) $(ALL_CPPFLAGS) -ffast-math -g -msse2 -O2 -m64 -mmacosx-version-min=10.9 -stdlib=libc++ -gdwarf-2 -Wno-write-strings
   ALL_CXXFLAGS  += $(CXXFLAGS) $(ALL_CFLAGS) -fno-exceptions -fno-rtti
   ALL_RESFLAGS  += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  ALL_LDFLAGS   += $(LDFLAGS) -L../../../../orx/code/lib/dynamic -L. -m64 -L/usr/lib64 -mmacosx-version-min=10.9 -stdlib=libc++ -dead_strip
+  ALL_LDFLAGS   += $(LDFLAGS) -L/Users/rom/workspace/orx/code/lib/dynamic -L. -m64 -L/usr/lib64 -mmacosx-version-min=10.9 -stdlib=libc++ -dead_strip
   LIBS      += -lorx -framework Foundation -framework AppKit
   LDDEPS    +=
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
