@@ -14,11 +14,8 @@ orxSTATUS LD44::Bootstrap() const
   // Add a config storage to find the initial config file
   orxResource_AddStorage(orxCONFIG_KZ_RESOURCE_GROUP, "../data/config", orxFALSE);
 
-  // Loads LD44.ini
-  orxConfig_Load("ld44.ini");
-
   // Done!
-  return orxSTATUS_FAILURE;
+  return orxSTATUS_SUCCESS;
 }
 
 void LD44::Update(const orxCLOCK_INFO &_rstInfo)
