@@ -81,19 +81,20 @@ void LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo)
     // Creates a new tetromino
     mpoSelection = CreateObject<Tetro>(orxConfig_GetString("TetroList"));
 
+    // Updates fall time
+    mfFallTime = GetTime();
+
     // Moves it
     if(!mpoSelection->Move(orxVECTOR_0, 0))
     {
       //! TODO: Game over
       meGameState = GameStateEnd;
+      return;
     }
-
-    // Updates fall time
-    mfFallTime = GetTime();
   }
 
   // Gets fall delay
-  fFallDelay = orxConfig_GetListFloat("FallDelayList", orxInput_IsActive("SpeedUp") ? 1 : 0);
+  fFallDelay = orxConfig_GetListFloat("FallDelayList", ((orxObject_GetActiveTime(mpoSelection->GetOrxObject()) >= orxConfig_GetFloat("InitialFallDelay")) && orxInput_IsActive("SpeedUp")) ? 1 : 0);
 
   // Left?
   if(orxInput_IsActive("MoveLeft"))
