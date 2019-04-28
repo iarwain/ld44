@@ -113,7 +113,7 @@ void LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo)
   }
 
   // Gets fall delay
-  fFallDelay = orxConfig_GetListFloat("FallDelayList", ((orxObject_GetActiveTime(mpoSelection->GetOrxObject()) >= orxConfig_GetFloat("InitialFallDelay")) && orxInput_IsActive("SpeedUp")) ? 1 : 0);
+  fFallDelay = orxConfig_GetListFloat("FallDelayList", ((orxObject_GetActiveTime(mpoPreview->GetOrxObject()) >= orxConfig_GetFloat("InitialFallDelay")) && orxInput_IsActive("SpeedUp")) ? 1 : 0);
 
   // Left?
   if(orxInput_IsActive("MoveLeft"))
