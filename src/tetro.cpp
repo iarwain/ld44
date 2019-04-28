@@ -71,8 +71,8 @@ void Tetro::Land()
     orxObject_SetOwner(poChild->GetOrxObject(), orxNULL);
   }
 
-  // Adds land track
-  AddTrack("LandTrack");
+  // Creates land even object
+  LD44::GetInstance().CreateObject("LandEvent");
 }
 
 void Tetro::Transform(const orxVECTOR &_rvPos, orxS32 _s32Rotation)

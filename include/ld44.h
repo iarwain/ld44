@@ -57,7 +57,6 @@ private:
 private:
                 orxVECTOR       mvBlockSize;
                 orxU64         *mau64Grid;
-                ScrollObject   *mpoScene;
                 Tetro          *mpoPreview;
                 Tetro          *mpoSelection;
                 GameState       meGameState;

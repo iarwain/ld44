@@ -11,7 +11,7 @@ static orxBOOL sbSplash   = orxTRUE;
 
 orxSTATUS LD44::Bootstrap() const
 {
-  // Add a config storage to find the initial config file
+  // Adds a config storage to find the initial config file
   orxResource_AddStorage(orxCONFIG_KZ_RESOURCE_GROUP, "../data/config", orxFALSE);
 
   // Done!
@@ -66,13 +66,13 @@ void LD44::Update(const orxCLOCK_INFO &_rstInfo)
       if(orxInput_HasBeenActivated("1PStart"))
       {
         // Creates the scene
-        mpoScene = CreateObject("Scene");
+        CreateObject("Scene");
         meGameState = GameStateRun;
       }
       else if(orxInput_HasBeenActivated("2PStart"))
       {
         // Creates the scene
-        mpoScene = CreateObject("DualScene");
+        CreateObject("DualScene");
         meGameState = GameStateRun;
       }
       break;
@@ -169,8 +169,8 @@ void LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo)
       // Moves it
       if(mpoSelection->Move(vMove, 0))
       {
-        // Adds move track
-        mpoSelection->AddTrack("MoveTrack");
+        // Creates move event object
+        CreateObject("MoveEvent");
       }
 
       // Updates delay
@@ -202,8 +202,8 @@ void LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo)
         // Moves it
         if(mpoSelection->Move(vMove, 0))
         {
-          // Adds move track
-          mpoSelection->AddTrack("MoveTrack");
+          // Creates move event object
+          CreateObject("MoveEvent");
         }
 
         // Updates delay
@@ -231,8 +231,8 @@ void LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo)
     // Changed?
     if(mpoSelection->s32Rotation != s32Rotation)
     {
-      // Adds rotate track
-      mpoSelection->AddTrack("RotateTrack");
+      // Creates rotate event object
+      CreateObject("RotateEvent");
 
       // Adds line
       if(!AddLine(ms32GridHeight - 1))
@@ -314,8 +314,8 @@ void LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo)
     orxConfig_SetS32("ClearedLines", s32ClearedLines);
     orxConfig_PopSection();
 
-    // Adds clear track
-    mpoScene->AddTrack("LineClearTrack");
+    // Creates clear line event object
+    CreateObject("ClearLineEvent");
   }
 
   // Pops config section
