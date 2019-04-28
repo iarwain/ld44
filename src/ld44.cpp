@@ -97,7 +97,10 @@ void LD44::Update(const orxCLOCK_INFO &_rstInfo)
       orxConfig_PushSection("Runtime");
       for(orxU32 i = 0, iCount = orxConfig_GetU32("PlayerCount"); i < iCount; i++)
       {
-        UpdateGame(_rstInfo, i);
+        if(!UpdateGame(_rstInfo, i))
+        {
+          break;
+        }
       }
       orxConfig_PopSection();
       break;
@@ -110,8 +113,15 @@ void LD44::Update(const orxCLOCK_INFO &_rstInfo)
 
     case GameStateEnd:
     {
+      orxU32 u32ID;
+
       // Adds game over screen
-      CreateObject("GameOver");
+      orxConfig_PushSection("Runtime");
+      u32ID = orxConfig_GetU32("GameID");
+      orxConfig_PopSection();
+      orxConfig_PushSection("Game");
+      CreateObject(orxConfig_GetListString("GameOverList", u32ID));
+      orxConfig_PopSection();
       meGameState = GameStateGameOver;
       break;
     }
@@ -121,8 +131,9 @@ void LD44::Update(const orxCLOCK_INFO &_rstInfo)
       // Reset?
       if(orxInput_IsActive("Reset"))
       {
-        // Quits
-        orxInput_SetValue("Quit", orxFLOAT_1);
+        // Restarts
+        Exit();
+        Init();
       }
 
       break;
@@ -130,7 +141,7 @@ void LD44::Update(const orxCLOCK_INFO &_rstInfo)
   }
 }
 
-void LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo, orxU32 _u32ID)
+orxBOOL LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo, orxU32 _u32ID)
 {
   orxFLOAT  fFallDelay;
   orxU64    u64GUID;
@@ -163,9 +174,8 @@ void LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo, orxU32 _u32ID)
     // Moves it
     if(!mastGames[_u32ID].poSelection->Move(orxVECTOR_0, 0))
     {
-      //! TODO: Game over
       meGameState = GameStateEnd;
-      return;
+      return orxFALSE;
     }
 
     // Creates new preview tetromino
@@ -258,10 +268,15 @@ void LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo, orxU32 _u32ID)
       CreateObject("RotateEvent");
 
       // Adds line
-      if(!AddLine(ms32GridHeight - 1, _u32ID))
+      if(AddLine(ms32GridHeight - 1, _u32ID))
       {
-        //! TODO: Game over
+        // Creates add line event object
+        CreateObject("AddLineEvent");
+      }
+      else
+      {
         meGameState = GameStateEnd;
+        return orxFALSE;
       }
     }
   }
@@ -351,6 +366,9 @@ void LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo, orxU32 _u32ID)
 
   // Pops config section
   orxConfig_PopSection();
+
+  // Done!
+  return orxTRUE;
 }
 
 orxSTATUS LD44::Init()
@@ -384,9 +402,16 @@ orxSTATUS LD44::Init()
     orxMemory_Zero(mastGames[i].au64Grid, ms32GridWidth * ms32GridHeight * sizeof(orxU64));
 
     // Inits variables
-    mastGames[i].poPreview = orxNULL;
+    mastGames[i].poPreview = mastGames[i].poSelection = orxNULL;
     mastGames[i].fTime = mastGames[i].fFallTime = mastGames[i].fLeftTime = mastGames[i].fRightTime = orxFLOAT_0;
   }
+
+  // Clears runtime section
+  orxConfig_ClearSection("Runtime");
+  orxConfig_PushSection("Runtime");
+  orxConfig_SetU32("Score1", 0);
+  orxConfig_SetU32("Score2", 0);
+  orxConfig_PopSection();
 
   // Inits state
   meGameState = GameStateStart;
@@ -417,6 +442,14 @@ orxSTATUS LD44::Run()
 
 void LD44::Exit()
 {
+  // Deletes all objects
+  for(ScrollObject *poObject = GetNextObject();
+      poObject;
+      poObject = GetNextObject())
+  {
+    DeleteObject(poObject);
+  }
+
   // For all games
   for(orxU32 i = 0; i < su32MaxPlayer; i++)
   {

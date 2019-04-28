@@ -45,7 +45,7 @@ private:
                 orxSTATUS       Bootstrap() const;
 
                 void            Update(const orxCLOCK_INFO &_rstInfo);
-                void            UpdateGame(const orxCLOCK_INFO &_rstInfo, orxU32 _u32ID);
+                orxBOOL         UpdateGame(const orxCLOCK_INFO &_rstInfo, orxU32 _u32ID);
 
                 orxSTATUS       Init();
                 orxSTATUS       Run();
