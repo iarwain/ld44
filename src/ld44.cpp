@@ -6,7 +6,8 @@
 #include "ld44.h"
 #undef __SCROLL_IMPL__
 
-static orxBOOL sbRestart = orxTRUE;
+static orxBOOL sbRestart  = orxTRUE;
+static orxBOOL sbSplash   = orxTRUE;
 
 orxSTATUS LD44::Bootstrap() const
 {
@@ -28,16 +29,46 @@ void LD44::Update(const orxCLOCK_INFO &_rstInfo)
   // Depending on game state
   switch(meGameState)
   {
+    case GameStateStart:
+    {
+      meGameState = GameStateSplash;
+      if(sbSplash)
+      {
+        // Only once
+        sbSplash = orxFALSE;
+        CreateObject("Splash");
+        break;
+      }
+      else
+      {
+        // Skips to menu
+        orxInput_SetValue("Menu", orxFLOAT_1);
+
+        // Falls through
+      }
+    }
+
     case GameStateSplash:
     {
-      meGameState = GameStateMenu;
+      if(orxInput_IsActive("Menu"))
+      {
+        CreateObject("Menu");
+        meGameState = GameStateMenu;
+      }
       break;
     }
 
     case GameStateMenu:
     {
-      mfTime = orxFLOAT_0;
-      meGameState = GameStateRun;
+      if(orxInput_HasBeenActivated("1PStart"))
+      {
+        // Inits time
+        mfTime = orxFLOAT_0;
+
+        // Creates the scene
+        mpoScene = CreateObject("Scene");
+        meGameState = GameStateRun;
+      }
       break;
     }
 
@@ -300,9 +331,6 @@ orxSTATUS LD44::Init()
     orxViewport_CreateFromConfig(orxConfig_GetListString("ViewportList", i));
   }
 
-  // Creates the scene
-  mpoScene = CreateObject("Scene");
-
   // Creates the grid
   orxConfig_GetVector("GridSize", &vGridSize);
   ms32GridWidth  = orxF2S(vGridSize.fX);
@@ -318,6 +346,7 @@ orxSTATUS LD44::Init()
 
   // Inits variables
   mfTime = mfFallTime = mfLeftTime = mfRightTime = orxFLOAT_0;
+  meGameState = GameStateStart;
 
   orxConfig_PopSection();
 

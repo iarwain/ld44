@@ -13,7 +13,8 @@ public:
 
   enum GameState
   {
-    GameStateSplash = 0,
+    GameStateStart= 0,
+    GameStateSplash,
     GameStateMenu,
     GameStateRun,
     GameStatePause,
