@@ -65,7 +65,6 @@ void LD44::Update(const orxCLOCK_INFO &_rstInfo)
 void LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo)
 {
   orxFLOAT  fFallDelay;
-  orxVECTOR vOffset;
   orxU64    u64GUID;
   orxS32    s32Width, s32Height;
   orxS32    s32ClearedLines = 0;
@@ -169,6 +168,13 @@ void LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo)
     {
       // Adds rotate track
       mpoSelection->AddTrack("RotateTrack");
+
+      // Adds line
+      if(!AddLine(ms32GridHeight - 1))
+      {
+        //! TODO: Game over
+        meGameState = GameStateEnd;
+      }
     }
   }
 
@@ -194,9 +200,6 @@ void LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo)
 
   // Gets grid size
   GetGridSize(s32Width, s32Height);
-
-  // Gets block size
-  orxConfig_GetVector("BlockSize", &vOffset);
 
   // Gets selection GUID
   u64GUID = mpoSelection ? mpoSelection->GetGUID() : 0;
@@ -230,38 +233,8 @@ void LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo)
       // Updates line cleared counter
       s32ClearedLines++;
 
-      // Clears grid line
-      ClearGridLine(i);
-
-      // For all blocks
-      for(Block *poBlock = GetNextObject<Block>();
-          poBlock;
-          poBlock = GetNextObject<Block>(poBlock))
-      {
-        orxVECTOR vPos;
-        orxS32 s32X, s32Y;
-
-        // Gets its world position
-        poBlock->GetPosition(vPos, orxTRUE);
-
-        // Gets its grid position
-        if(GetGridPosition(vPos, s32X, s32Y) != orxSTATUS_FAILURE)
-        {
-          // Is on cleared line?
-          if(s32Y == i)
-          {
-            // Asks for deletion
-            poBlock->SetLifeTime(orxFLOAT_0);
-          }
-          // Is above it?
-          else if(s32Y < i)
-          {
-            // Moves it downward
-            vPos.fY += vOffset.fY;
-            poBlock->SetPosition(vPos, orxTRUE);
-          }
-        }
-      }
+      // Clears line
+      ClearLine(i);
 
       // Updates line index due to cleared line
       i++;
@@ -303,6 +276,9 @@ orxSTATUS LD44::Init()
   ms32GridHeight = orxF2S(vGridSize.fY);
   mau64Grid = (orxU64 *)orxMemory_Allocate(ms32GridWidth * ms32GridHeight * sizeof(orxU64), orxMEMORY_TYPE_MAIN);
   orxMemory_Zero(mau64Grid, ms32GridWidth * ms32GridHeight * sizeof(orxU64));
+
+  // Gets block size
+  orxConfig_GetVector("BlockSize", &mvBlockSize);
 
   // Inits variables
   mfTime = mfFallTime = mfLeftTime = mfRightTime = orxFLOAT_0;
@@ -386,9 +362,9 @@ void LD44::GetGridSize(orxS32 &_rs32Width, orxS32 &_rs32Height) const
   _rs32Height = ms32GridHeight;
 }
 
-void LD44::ClearGridLine(orxS32 _s32Line)
+void LD44::ClearLine(orxS32 _s32Line)
 {
-  // For all lines above cleared one
+  // For all lines at or above cleared one
   for(orxS32 i = _s32Line; i > 0; i--)
   {
     // For all columns
@@ -405,6 +381,146 @@ void LD44::ClearGridLine(orxS32 _s32Line)
     // Clears it
     SetGridValue(j, 0, 0);
   }
+
+  // For all blocks
+  for(Block *poBlock = GetNextObject<Block>();
+      poBlock;
+      poBlock = GetNextObject<Block>(poBlock))
+  {
+    orxVECTOR vPos;
+    orxS32 s32X, s32Y;
+
+    // Gets its world position
+    poBlock->GetPosition(vPos, orxTRUE);
+
+    // Gets its grid position
+    if(GetGridPosition(vPos, s32X, s32Y) != orxSTATUS_FAILURE)
+    {
+      // Is on cleared line?
+      if(s32Y == _s32Line)
+      {
+        // Asks for deletion
+        poBlock->SetLifeTime(orxFLOAT_0);
+      }
+      // Is above it?
+      else if(s32Y < _s32Line)
+      {
+        // Moves it downward
+        vPos.fY += mvBlockSize.fY;
+        poBlock->SetPosition(vPos, orxTRUE);
+      }
+    }
+  }
+}
+
+void LD44::DumpGrid()
+{
+  orxLOG("=== Dump Begin ===");
+  for(orxU32 i = 0; i < ms32GridHeight; i++)
+  {
+    orxLOG("%d %d %d %d %d %d %d %d %d %d", GetGridValue(0, i) != 0, GetGridValue(1, i) != 0, GetGridValue(2, i) != 0, GetGridValue(3, i) != 0, GetGridValue(4, i) != 0, GetGridValue(5, i) != 0, GetGridValue(6, i) != 0, GetGridValue(7, i) != 0, GetGridValue(8, i) != 0, GetGridValue(9, i) != 0);
+  }
+  orxLOG("=== Dump End ===");
+}
+
+orxBOOL LD44::AddLine(orxS32 _s32Line)
+{
+  orxU64  u64GUID;
+  orxS32  s32Hole;
+  orxBOOL bResult = orxTRUE;
+
+  // Gets selection GUID
+  u64GUID = mpoSelection ? mpoSelection->GetGUID() : 0;
+
+  // For all lines above added one
+  for(orxS32 i = 1; i < _s32Line; i++)
+  {
+    // For all columns
+    for(orxS32 j = 0; j < ms32GridWidth; j++)
+    {
+      // Moves block one line up
+      SetGridValue(j, i, GetGridValue(j, i + 1));
+    }
+  }
+
+  // For all blocks
+  for(Block *poBlock = GetNextObject<Block>();
+      poBlock;
+      poBlock = GetNextObject<Block>(poBlock))
+  {
+    // No owner?
+    if(!orxObject_GetOwner(poBlock->GetOrxObject()))
+    {
+      orxVECTOR vPos;
+
+      // Updates its position
+      poBlock->GetPosition(vPos, orxTRUE);
+      vPos.fY -= mvBlockSize.fY;
+      poBlock->SetPosition(vPos, orxTRUE);
+    }
+  }
+
+  // Gets hole columns
+  s32Hole = orxMath_GetRandomS32(0, ms32GridWidth - 1);
+
+  // Sets dead tetro as current
+  orxConfig_PushSection("Runtime");
+  orxConfig_SetString("Tetro", "TetroDead");
+  orxConfig_PopSection();
+
+  // For all columns (added line)
+  for(orxS32 j = 0; j < ms32GridWidth; j++)
+  {
+    // Not hole?
+    if(j != s32Hole)
+    {
+      orxVECTOR vPos;
+      Block    *poBlock;
+
+      // Computes position
+      orxVector_Set(&vPos, (orxS2F(j) + orx2F(0.5f)) * mvBlockSize.fX, (orxS2F(_s32Line) + orx2F(0.5f)) * mvBlockSize.fY, orxFLOAT_0);
+
+      // Adds new block
+      poBlock = LD44::GetInstance().CreateObject<Block>("TetroBlock");
+      poBlock->SetPosition(vPos, orxTRUE);
+      SetGridValue(j, _s32Line, poBlock->GetGUID());
+    }
+    else
+    {
+      // Clears it
+      SetGridValue(j, _s32Line, 0);
+    }
+  }
+
+  // Try to maintain current position for selection
+  if(!mpoSelection->Move(orxVECTOR_0, 0))
+  {
+    orxVECTOR vUp;
+
+    // Try to move it up
+    orxVector_Set(&vUp, orxFLOAT_0, -orxFLOAT_1, orxFLOAT_0);
+    bResult = mpoSelection->Move(vUp, 0);
+  }
+
+  // For all columns
+  for(orxS32 i = 0; i < ms32GridWidth; i++)
+  {
+    orxU64 u64BlockID;
+
+    // Gets its block ID on top line
+    u64BlockID = GetGridValue(i, 0);
+
+    // Is a block?
+    if((u64BlockID != 0) && (u64BlockID != u64GUID))
+    {
+      // Stops
+      bResult = orxFALSE;
+      break;
+    }
+  }
+
+  // Done!
+  return bResult;
 }
 
 int main(int argc, char **argv)
