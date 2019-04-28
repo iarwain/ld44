@@ -1,9 +1,12 @@
 
+A Ludum Dare 44 game prototype by Fully BUgged.
+Code - Romain Killian
+Gfx - Nicolas Riviere
 
-Coin Op Chaos.mp3
+
 Music by Eric Matyas
+Coin Op Chaos
 www.soundimage.org
-
 
 Font:
 "Gamegirl Classic" - Truetype Font
@@ -11,9 +14,15 @@ Copyright (c) 2004 by ck! [Freaky Fonts].
 All rights reserved.
 The personal, non-commercial use of my font is free.
 
+"Tetris 2" by Zombie Unicorn
+Shareware, Non-Commercial.
+
 
 Sounds:
 https://freesound.org
 sf3-sfx-menu-select.wav by broumbroum
 sf3-sfx-menu-back.wav by broumbroum
 success.wav by grunz
+
+Orx Engine
+http://orx-project.org/
