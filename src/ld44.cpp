@@ -244,8 +244,14 @@ void LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo)
   // Any line cleared?
   if(s32ClearedLines > 0)
   {
+    // Updates config
+    orxConfig_PushSection("Runtime");
+    orxConfig_SetS32("ClearedLines", s32ClearedLines);
+    orxConfig_PopSection();
+
     // Adds clear track
     mpoScene->AddTrack("LineClearTrack");
+    orxLOG("TRACK!!");
   }
 
   // Pops config section
