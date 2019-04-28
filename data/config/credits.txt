@@ -1,5 +1,9 @@
 
 
+Coin Op Chaos.mp3
+Music by Eric Matyas
+www.soundimage.org
+
 
 Font:
 "Gamegirl Classic" - Truetype Font
@@ -8,7 +12,8 @@ All rights reserved.
 The personal, non-commercial use of my font is free.
 
 
-Sounds;
+Sounds:
+https://freesound.org
 sf3-sfx-menu-select.wav by broumbroum
 sf3-sfx-menu-back.wav by broumbroum
-
+success.wav by grunz
