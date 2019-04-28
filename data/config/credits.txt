@@ -1,0 +1,14 @@
+
+
+
+Font:
+"Gamegirl Classic" - Truetype Font
+Copyright (c) 2004 by ck! [Freaky Fonts]. 
+All rights reserved.
+The personal, non-commercial use of my font is free.
+
+
+Sounds;
+sf3-sfx-menu-select.wav by broumbroum
+sf3-sfx-menu-back.wav by broumbroum
+
