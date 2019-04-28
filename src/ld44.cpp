@@ -110,7 +110,11 @@ void LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo)
       orxVector_Set(&vMove, -orxFLOAT_1, orxFLOAT_0, orxFLOAT_0);
 
       // Moves it
-      mpoSelection->Move(vMove, 0);
+      if(mpoSelection->Move(vMove, 0))
+      {
+        // Adds move track
+        mpoSelection->AddTrack("MoveTrack");
+      }
 
       // Updates delay
       mfLeftTime = orxConfig_GetListFloat("MoveDelayList", orxInput_HasNewStatus("MoveLeft") ? 0 : 1);
@@ -139,7 +143,11 @@ void LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo)
         orxVector_Set(&vMove, orxFLOAT_1, orxFLOAT_0, orxFLOAT_0);
 
         // Moves it
-        mpoSelection->Move(vMove, 0);
+        if(mpoSelection->Move(vMove, 0))
+        {
+          // Adds move track
+          mpoSelection->AddTrack("MoveTrack");
+        }
 
         // Updates delay
         mfRightTime = orxConfig_GetListFloat("MoveDelayList", orxInput_HasNewStatus("MoveRight") ? 0 : 1);
