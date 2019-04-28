@@ -612,6 +612,7 @@ orxBOOL LD44::AddLine(orxS32 _s32Line, orxU32 _u32ID)
       poBlock = LD44::GetInstance().CreateObject<Block>("TetroBlock");
       poBlock->SetPosition(vPos, orxTRUE);
       poBlock->SetGroupID(u32GroupID);
+      poBlock->mu32ID = _u32ID;
       SetGridValue(j, _s32Line, poBlock->GetGUID(), _u32ID);
     }
     else
