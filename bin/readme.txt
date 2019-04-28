@@ -1,9 +1,38 @@
-
 -------------------------------------------------
+-                  Lifetris                     -
+-------------------------------------------------
+
 A Ludum Dare 44 GameJam prototype by Fully bUgged.
 
 Romain Killian
-Nicolas Riviere
+Nicolas Rivière
+
+-------------------------------------------------
+
+Controls:
+
+Player1
+-------
+
+Move Left               - Left arrow
+Move Right              - Right arrow
+Drop                    - Down arrow
+Rotate Clockwise        - Right Control
+Rotate CounterClockwise - Right Shift
+
+... or gamepad #1
+
+Player2
+-------
+
+Move Left               - A
+Move Right              - D
+Drop                    - S
+Rotate Clockwise        - E
+Rotate CounterClockwise - Q
+
+... or gamepad #2
+
 -------------------------------------------------
 
 Music by Eric Matyas
@@ -13,7 +42,7 @@ www.soundimage.org
 
 Font:
 "Gamegirl Classic" - Truetype Font
-Copyright (c) 2004 by ck! [Freaky Fonts]. 
+Copyright (c) 2004 by ck! [Freaky Fonts].
 All rights reserved.
 The personal, non-commercial use of my font is free.
 
