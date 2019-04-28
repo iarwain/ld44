@@ -5,7 +5,6 @@
 void Tetro::OnCreate()
 {
   orxVECTOR vOffset, vPos;
-  orxCOLOR stColor;
 
   // Sets as current tetromino
   orxConfig_PushSection("Runtime");

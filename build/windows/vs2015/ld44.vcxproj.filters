@@ -2,20 +2,23 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="src">
-      <UniqueIdentifier>{96CE2620-E237-F746-BBBF-E48048B14893}</UniqueIdentifier>
+      <UniqueIdentifier>{59C04921-95E7-7B48-8E67-106C6D501146}</UniqueIdentifier>
     </Filter>
     <Filter Include="include">
-      <UniqueIdentifier>{D5A03544-B0F8-E149-A2C5-37895A5F3C1A}</UniqueIdentifier>
+      <UniqueIdentifier>{872FB44B-CB91-5143-92A3-144C39391F33}</UniqueIdentifier>
     </Filter>
     <Filter Include="include\Scroll">
-      <UniqueIdentifier>{98BE9BC8-DF6C-3E49-8748-59D3B8B871BE}</UniqueIdentifier>
+      <UniqueIdentifier>{2D1DF139-F143-224A-89B5-5152DB64A2C6}</UniqueIdentifier>
     </Filter>
     <Filter Include="config">
-      <UniqueIdentifier>{F88E60E9-DC15-D843-96BA-1F9B99142EFA}</UniqueIdentifier>
+      <UniqueIdentifier>{CC91BB34-2103-F64C-B9BB-C81DDF1F21D1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\data\config\CreationTemplate.ini">
+      <Filter>config</Filter>
+    </None>
+    <None Include="..\..\..\data\config\font_gamegirl.ini">
       <Filter>config</Filter>
     </None>
     <None Include="..\..\..\data\config\ld44.ini">
@@ -30,8 +33,20 @@
     <None Include="..\..\..\data\config\SettingsTemplate.ini">
       <Filter>config</Filter>
     </None>
+    <None Include="..\..\..\data\config\sound.ini">
+      <Filter>config</Filter>
+    </None>
+    <None Include="..\..\..\data\config\tetro.ini">
+      <Filter>config</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\include\ld44.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\tetro.h">
+      <Filter>include</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\include\Scroll\Scroll.h">
       <Filter>include\Scroll</Filter>
     </ClInclude>
@@ -47,6 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\ld44.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tetro.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

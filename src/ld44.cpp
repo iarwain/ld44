@@ -421,7 +421,7 @@ void LD44::ClearLine(orxS32 _s32Line)
 void LD44::DumpGrid()
 {
   orxLOG("=== Dump Begin ===");
-  for(orxU32 i = 0; i < ms32GridHeight; i++)
+  for(orxS32 i = 0; i < ms32GridHeight; i++)
   {
     orxLOG("%d %d %d %d %d %d %d %d %d %d", GetGridValue(0, i) != 0, GetGridValue(1, i) != 0, GetGridValue(2, i) != 0, GetGridValue(3, i) != 0, GetGridValue(4, i) != 0, GetGridValue(5, i) != 0, GetGridValue(6, i) != 0, GetGridValue(7, i) != 0, GetGridValue(8, i) != 0, GetGridValue(9, i) != 0);
   }

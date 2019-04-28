@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{FCEA8278-0D41-3B41-B3FF-8F260D47211A}</ProjectGuid>
+    <ProjectGuid>{E9C9C130-F113-FA40-8B4D-32398FFA17AB}</ProjectGuid>
     <RootNamespace>ld44</RootNamespace>
     <Keyword>Win32Proj</Keyword>
   </PropertyGroup>
@@ -370,6 +370,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\include\ld44.h" />
+    <ClInclude Include="..\..\..\include\tetro.h" />
     <ClInclude Include="..\..\..\include\Scroll\Scroll.h" />
     <ClInclude Include="..\..\..\include\Scroll\ScrollBase.h" />
     <ClInclude Include="..\..\..\include\Scroll\ScrollEd.h" />
@@ -378,13 +380,18 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\src\ld44.cpp">
     </ClCompile>
+    <ClCompile Include="..\..\..\src\tetro.cpp">
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\data\config\CreationTemplate.ini" />
+    <None Include="..\..\..\data\config\font_gamegirl.ini" />
     <None Include="..\..\..\data\config\ld44.ini" />
     <None Include="..\..\..\data\config\ld44d.ini" />
     <None Include="..\..\..\data\config\ld44p.ini" />
     <None Include="..\..\..\data\config\SettingsTemplate.ini" />
+    <None Include="..\..\..\data\config\sound.ini" />
+    <None Include="..\..\..\data\config\tetro.ini" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
