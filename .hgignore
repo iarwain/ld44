@@ -3,3 +3,4 @@ syntax: glob
 bin/
 dev.ini
 build/
+*.sublime-workspace
