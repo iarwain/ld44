@@ -78,8 +78,11 @@ void LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo)
   // No selection?
   if(!mpoSelection)
   {
-    // Creates a new tetromino
-    mpoSelection = CreateObject<Tetro>(orxConfig_GetString("TetroList"));
+    // Gets preview tetromino
+    mpoSelection = mpoPreview;
+
+    // Activates it
+    mpoSelection->Activate();
 
     // Updates fall time
     mfFallTime = GetTime();
@@ -91,6 +94,9 @@ void LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo)
       meGameState = GameStateEnd;
       return;
     }
+
+    // Creates new preview tetromino
+    mpoPreview = CreateObject<Tetro>(orxConfig_GetString("TetroList"));
   }
 
   // Gets fall delay
@@ -293,6 +299,9 @@ orxSTATUS LD44::Init()
 
   // Gets block size
   orxConfig_GetVector("BlockSize", &mvBlockSize);
+
+  // Creates preview tetromino
+  mpoPreview = CreateObject<Tetro>(orxConfig_GetString("TetroList"));
 
   // Inits variables
   mfTime = mfFallTime = mfLeftTime = mfRightTime = orxFLOAT_0;

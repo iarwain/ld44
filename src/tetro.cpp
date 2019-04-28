@@ -39,8 +39,18 @@ void Tetro::OnCreate()
   // Sets rotation
   s32Rotation = orxConfig_GetS32("InitRotation");
 
-  // Moves
-  Move(orxVECTOR_0, 0);
+  // Applies it
+  Transform(orxVECTOR_0, 0);
+}
+
+void Tetro::Activate()
+{
+  orxVECTOR vPos;
+
+  // Resets its depth
+  GetPosition(vPos);
+  vPos.fZ = orxFLOAT_0;
+  SetPosition(vPos);
 }
 
 void Tetro::Update(const orxCLOCK_INFO &_rstInfo)

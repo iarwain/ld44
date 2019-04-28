@@ -15,7 +15,9 @@ private:
   void                    Validate();
   void                    Transform(const orxVECTOR &_rvPos, orxS32 _s32Rotation);
 
+
 public:
+  void                    Activate();
   void                    Land();
   orxBOOL                 Move(const orxVECTOR &_rvPos, orxS32 _s32Rotation);
 
