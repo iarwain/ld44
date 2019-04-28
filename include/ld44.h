@@ -18,6 +18,7 @@ public:
     GameStateRun,
     GameStatePause,
     GameStateEnd,
+    GameStateGameOver,
 
     GameStateNumber,
 

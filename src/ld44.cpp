@@ -6,6 +6,7 @@
 #include "ld44.h"
 #undef __SCROLL_IMPL__
 
+static orxBOOL sbRestart = orxTRUE;
 
 orxSTATUS LD44::Bootstrap() const
 {
@@ -56,7 +57,19 @@ void LD44::Update(const orxCLOCK_INFO &_rstInfo)
     {
       // Adds game over screen
       CreateObject("GameOver");
-      meGameState = GameStateNumber;
+      meGameState = GameStateGameOver;
+      break;
+    }
+
+    case GameStateGameOver:
+    {
+      // Reset?
+      if(orxInput_IsActive("Reset"))
+      {
+        // Quits
+        orxInput_SetValue("Quit", orxFLOAT_1);
+      }
+
       break;
     }
   }
@@ -319,6 +332,9 @@ orxSTATUS LD44::Run()
   // Should quit?
   if(orxInput_IsActive("Quit"))
   {
+    // Updates restart status
+    sbRestart = orxInput_IsActive("Reset");
+
     // Updates result
     eResult = orxSTATUS_FAILURE;
   }
@@ -548,8 +564,11 @@ orxBOOL LD44::AddLine(orxS32 _s32Line)
 
 int main(int argc, char **argv)
 {
-  // Execute our game
-  LD44::GetInstance().Execute(argc, argv);
+  while(sbRestart)
+  {
+    // Execute our game
+    LD44::GetInstance().Execute(argc, argv);
+  }
 
   // Done!
   return EXIT_SUCCESS;
