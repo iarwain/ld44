@@ -564,8 +564,12 @@ orxBOOL LD44::AddLine(orxS32 _s32Line)
 
 int main(int argc, char **argv)
 {
+  // Should restart?
   while(sbRestart)
   {
+    // Clears restart
+    sbRestart = orxFALSE;
+
     // Execute our game
     LD44::GetInstance().Execute(argc, argv);
   }
