@@ -251,7 +251,6 @@ void LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo)
 
     // Adds clear track
     mpoScene->AddTrack("LineClearTrack");
-    orxLOG("TRACK!!");
   }
 
   // Pops config section
