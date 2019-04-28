@@ -17,8 +17,8 @@ Player1
 Move Left               - Left arrow
 Move Right              - Right arrow
 Drop                    - Down arrow
-Rotate Clockwise        - Right Control
-Rotate CounterClockwise - Right Shift
+Rotate Clockwise        - Right Control/Right Option
+Rotate CounterClockwise - Right Shift/Right Command
 
 ... or gamepad #1
 
