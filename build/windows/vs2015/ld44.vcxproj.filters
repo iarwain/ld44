@@ -2,20 +2,23 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="src">
-      <UniqueIdentifier>{59C04921-95E7-7B48-8E67-106C6D501146}</UniqueIdentifier>
+      <UniqueIdentifier>{3FF70B62-7967-6747-9E26-F5E378DB34ED}</UniqueIdentifier>
     </Filter>
     <Filter Include="include">
-      <UniqueIdentifier>{872FB44B-CB91-5143-92A3-144C39391F33}</UniqueIdentifier>
+      <UniqueIdentifier>{AE14362A-B82A-AD43-94DC-626E50D2BF86}</UniqueIdentifier>
     </Filter>
     <Filter Include="include\Scroll">
-      <UniqueIdentifier>{2D1DF139-F143-224A-89B5-5152DB64A2C6}</UniqueIdentifier>
+      <UniqueIdentifier>{A39C4354-E264-584D-9E04-BF477AF9BBD1}</UniqueIdentifier>
     </Filter>
     <Filter Include="config">
-      <UniqueIdentifier>{CC91BB34-2103-F64C-B9BB-C81DDF1F21D1}</UniqueIdentifier>
+      <UniqueIdentifier>{D5B93BCB-DFBD-9D47-8CBA-1479C33FD3CC}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\data\config\CreationTemplate.ini">
+      <Filter>config</Filter>
+    </None>
+    <None Include="..\..\..\data\config\dev.ini">
       <Filter>config</Filter>
     </None>
     <None Include="..\..\..\data\config\font_gamegirl.ini">

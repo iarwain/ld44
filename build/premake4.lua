@@ -103,6 +103,7 @@ solution "ld44"
     }
 
     targetdir ("../bin")
+    targetname("lifetris")
 
     flags
     {

@@ -22,7 +22,7 @@ endif
 ifeq ($(config),debug64)
   OBJDIR     = obj/x64/Debug
   TARGETDIR  = ../../../bin
-  TARGET     = $(TARGETDIR)/ld44d
+  TARGET     = $(TARGETDIR)/lifetrisd
   DEFINES   += -D__orxDEBUG__
   INCLUDES  += -I$(ORX)/include -I../../../include -I../../../include/Scroll
   ALL_CPPFLAGS  += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
@@ -46,7 +46,7 @@ endif
 ifeq ($(config),profile64)
   OBJDIR     = obj/x64/Profile
   TARGETDIR  = ../../../bin
-  TARGET     = $(TARGETDIR)/ld44p
+  TARGET     = $(TARGETDIR)/lifetrisp
   DEFINES   += -D__orxPROFILER__
   INCLUDES  += -I$(ORX)/include -I../../../include -I../../../include/Scroll
   ALL_CPPFLAGS  += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
@@ -70,7 +70,7 @@ endif
 ifeq ($(config),release64)
   OBJDIR     = obj/x64/Release
   TARGETDIR  = ../../../bin
-  TARGET     = $(TARGETDIR)/ld44
+  TARGET     = $(TARGETDIR)/lifetris
   DEFINES   +=
   INCLUDES  += -I$(ORX)/include -I../../../include -I../../../include/Scroll
   ALL_CPPFLAGS  += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
@@ -94,7 +94,7 @@ endif
 ifeq ($(config),debug32)
   OBJDIR     = obj/x32/Debug
   TARGETDIR  = ../../../bin
-  TARGET     = $(TARGETDIR)/ld44d
+  TARGET     = $(TARGETDIR)/lifetrisd
   DEFINES   += -D__orxDEBUG__
   INCLUDES  += -I$(ORX)/include -I../../../include -I../../../include/Scroll
   ALL_CPPFLAGS  += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
@@ -118,7 +118,7 @@ endif
 ifeq ($(config),profile32)
   OBJDIR     = obj/x32/Profile
   TARGETDIR  = ../../../bin
-  TARGET     = $(TARGETDIR)/ld44p
+  TARGET     = $(TARGETDIR)/lifetrisp
   DEFINES   += -D__orxPROFILER__
   INCLUDES  += -I$(ORX)/include -I../../../include -I../../../include/Scroll
   ALL_CPPFLAGS  += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
@@ -142,7 +142,7 @@ endif
 ifeq ($(config),release32)
   OBJDIR     = obj/x32/Release
   TARGETDIR  = ../../../bin
-  TARGET     = $(TARGETDIR)/ld44
+  TARGET     = $(TARGETDIR)/lifetris
   DEFINES   +=
   INCLUDES  += -I$(ORX)/include -I../../../include -I../../../include/Scroll
   ALL_CPPFLAGS  += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
@@ -164,8 +164,8 @@ ifeq ($(config),release32)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/tetro.o \
 	$(OBJDIR)/ld44.o \
+	$(OBJDIR)/tetro.o \
 
 RESOURCES := \
 
@@ -226,11 +226,11 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) -x c++-header $(ALL_CXXFLAGS) -MMD -MP $(DEFINES) $(INCLUDES) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
 endif
 
-$(OBJDIR)/tetro.o: ../../../src/tetro.cpp
+$(OBJDIR)/ld44.o: ../../../src/ld44.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
-$(OBJDIR)/ld44.o: ../../../src/ld44.cpp
+$(OBJDIR)/tetro.o: ../../../src/tetro.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

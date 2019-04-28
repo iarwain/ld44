@@ -14,8 +14,11 @@ orxSTATUS LD44::Bootstrap() const
   // Add a config storage to find the initial config file
   orxResource_AddStorage(orxCONFIG_KZ_RESOURCE_GROUP, "../data/config", orxFALSE);
 
+  // Loads LD44.ini
+  orxConfig_Load("ld44.ini");
+
   // Done!
-  return orxSTATUS_SUCCESS;
+  return orxSTATUS_FAILURE;
 }
 
 void LD44::Update(const orxCLOCK_INFO &_rstInfo)
@@ -60,13 +63,19 @@ void LD44::Update(const orxCLOCK_INFO &_rstInfo)
 
     case GameStateMenu:
     {
+      // Inits time
+      mfTime = orxFLOAT_0;
+
       if(orxInput_HasBeenActivated("1PStart"))
       {
-        // Inits time
-        mfTime = orxFLOAT_0;
-
         // Creates the scene
         mpoScene = CreateObject("Scene");
+        meGameState = GameStateRun;
+      }
+      else if(orxInput_HasBeenActivated("2PStart"))
+      {
+        // Creates the scene
+        mpoScene = CreateObject("DualScene");
         meGameState = GameStateRun;
       }
       break;

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ld44", "ld44.vcxproj", "{E9C9C130-F113-FA40-8B4D-32398FFA17AB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ld44", "ld44.vcxproj", "{B1ADE776-6310-0040-8AB2-4F6D805F97F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,18 +13,18 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E9C9C130-F113-FA40-8B4D-32398FFA17AB}.Debug|x64.ActiveCfg = Debug|x64
-		{E9C9C130-F113-FA40-8B4D-32398FFA17AB}.Debug|x64.Build.0 = Debug|x64
-		{E9C9C130-F113-FA40-8B4D-32398FFA17AB}.Debug|Win32.ActiveCfg = Debug|Win32
-		{E9C9C130-F113-FA40-8B4D-32398FFA17AB}.Debug|Win32.Build.0 = Debug|Win32
-		{E9C9C130-F113-FA40-8B4D-32398FFA17AB}.Profile|x64.ActiveCfg = Profile|x64
-		{E9C9C130-F113-FA40-8B4D-32398FFA17AB}.Profile|x64.Build.0 = Profile|x64
-		{E9C9C130-F113-FA40-8B4D-32398FFA17AB}.Profile|Win32.ActiveCfg = Profile|Win32
-		{E9C9C130-F113-FA40-8B4D-32398FFA17AB}.Profile|Win32.Build.0 = Profile|Win32
-		{E9C9C130-F113-FA40-8B4D-32398FFA17AB}.Release|x64.ActiveCfg = Release|x64
-		{E9C9C130-F113-FA40-8B4D-32398FFA17AB}.Release|x64.Build.0 = Release|x64
-		{E9C9C130-F113-FA40-8B4D-32398FFA17AB}.Release|Win32.ActiveCfg = Release|Win32
-		{E9C9C130-F113-FA40-8B4D-32398FFA17AB}.Release|Win32.Build.0 = Release|Win32
+		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Debug|x64.ActiveCfg = Debug|x64
+		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Debug|x64.Build.0 = Debug|x64
+		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Debug|Win32.Build.0 = Debug|Win32
+		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Profile|x64.ActiveCfg = Profile|x64
+		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Profile|x64.Build.0 = Profile|x64
+		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Profile|Win32.ActiveCfg = Profile|Win32
+		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Profile|Win32.Build.0 = Profile|Win32
+		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Release|x64.ActiveCfg = Release|x64
+		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Release|x64.Build.0 = Release|x64
+		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Release|Win32.ActiveCfg = Release|Win32
+		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
