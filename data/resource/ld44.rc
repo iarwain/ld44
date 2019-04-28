@@ -1,0 +1,50 @@
+#include <windows.h>
+#include <commctrl.h>
+#include <richedit.h>
+
+#ifndef IDC_STATIC
+#define IDC_STATIC (-1)
+#endif
+
+#define IDI_ICON1                               102
+#define IDI_ICON2                               103
+#define IDI_ICON3                               104
+#define IDI_ICON4                               105
+#define IDI_ICON5                               106
+
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+IDI_ICON1          ICON           "..\\icon\\512.ico"
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+IDI_ICON2          ICON           "..\\icon\\256.ico"
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+IDI_ICON3          ICON           "..\\icon\\128.ico"
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+IDI_ICON4          ICON           "..\\icon\\64.ico"
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+IDI_ICON5          ICON           "..\\icon\\32.ico"
+
+1 VERSIONINFO
+FILEVERSION     1,2,0,0
+PRODUCTVERSION  1,2,0,0
+
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "040904E4"
+    BEGIN
+      VALUE "CompanyName", "Fully Bugged Software"
+      VALUE "FileDescription", "Lifetris"
+      VALUE "FileVersion", "1.2"
+      VALUE "InternalName", "Lifetris"
+      VALUE "LegalCopyright", "Fully Bugged Software"
+      VALUE "OriginalFilename", "cell.exe"
+      VALUE "ProductName", "Lifetris"
+      VALUE "ProductVersion", "1.0"
+    END
+  END
+
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x409, 1252
+  END
+END

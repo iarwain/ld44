@@ -27,24 +27,25 @@ public:
   };
 
 
-                orxFLOAT        GetTime() const       {return mfTime;}
-                GameState       GetGameState() const  {return meGameState;}
+                orxFLOAT        GetTime(orxU32 _u32ID) const  {return mastGames[_u32ID].fTime;}
+                GameState       GetGameState() const          {return meGameState;}
 
-                orxSTATUS       GetGridPosition(const orxVECTOR &_rvPos, orxS32 &_rs32X, orxS32 &_rs32Y) const;
-                orxU64          GetGridValue(orxS32 _s32X, orxS32 _s32Y) const;
-                void            SetGridValue(orxS32 _s32X, orxS32 _s32Y, orxU64 _u64Value);
                 void            GetGridSize(orxS32 &_rs32Width, orxS32 &_rs32Height) const;
-                void            ClearLine(orxS32 _s32Line);
-                orxBOOL         AddLine(orxS32 _s32Line);
+                orxSTATUS       GetGridPosition(const orxVECTOR &_rvPos, orxS32 &_rs32X, orxS32 &_rs32Y) const;
+                orxU64          GetGridValue(orxS32 _s32X, orxS32 _s32Y, orxU32 _u32ID) const;
+                void            SetGridValue(orxS32 _s32X, orxS32 _s32Y, orxU64 _u64Value, orxU32 _u32ID);
+                void            ClearLine(orxS32 _s32Line, orxU32 _u32ID);
+                orxBOOL         AddLine(orxS32 _s32Line, orxU32 _u32ID);
+          const orxSTRING       GetGameInput(const orxSTRING _zInput, orxU32 _u32ID) const;
 
-                void            DumpGrid();
+                void            DumpGrid(orxU32 _u32ID);
 
 private:
 
                 orxSTATUS       Bootstrap() const;
 
                 void            Update(const orxCLOCK_INFO &_rstInfo);
-                void            UpdateGame(const orxCLOCK_INFO &_rstInfo);
+                void            UpdateGame(const orxCLOCK_INFO &_rstInfo, orxU32 _u32ID);
 
                 orxSTATUS       Init();
                 orxSTATUS       Run();
@@ -55,15 +56,19 @@ private:
 
 
 private:
+  static const  orxU32          su32MaxPlayer = 2;
                 orxVECTOR       mvBlockSize;
-                orxU64         *mau64Grid;
-                Tetro          *mpoPreview;
-                Tetro          *mpoSelection;
                 GameState       meGameState;
-                orxFLOAT        mfTime;
                 orxS32          ms32GridWidth, ms32GridHeight;
-                orxFLOAT        mfFallTime;
-                orxFLOAT        mfLeftTime, mfRightTime;
+
+                struct Game {
+                  orxFLOAT        fTime;
+                  orxU64         *au64Grid;
+                  Tetro          *poPreview;
+                  Tetro          *poSelection;
+                  orxFLOAT        fFallTime;
+                  orxFLOAT        fLeftTime, fRightTime;
+                }mastGames[su32MaxPlayer];
 };
 
 #endif // __LD44_H_

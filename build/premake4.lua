@@ -231,7 +231,8 @@ project "ld44"
         "../src/**.cpp",
         "../src/**.c",
         "../include/**.h",
-        "../data/config/**.ini"
+        "../data/config/**.ini",
+        "../data/resource/**.rc"
     }
     includedirs {"../include"}
     includedirs {"../include/Scroll"}

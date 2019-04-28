@@ -2,16 +2,22 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="src">
-      <UniqueIdentifier>{3FF70B62-7967-6747-9E26-F5E378DB34ED}</UniqueIdentifier>
+      <UniqueIdentifier>{A2D12475-9DBF-544E-95C0-4AC6C1EB7111}</UniqueIdentifier>
     </Filter>
     <Filter Include="include">
-      <UniqueIdentifier>{AE14362A-B82A-AD43-94DC-626E50D2BF86}</UniqueIdentifier>
+      <UniqueIdentifier>{5E6F0F6B-BC10-4A47-9CCA-4947BCDEFC15}</UniqueIdentifier>
     </Filter>
     <Filter Include="include\Scroll">
-      <UniqueIdentifier>{A39C4354-E264-584D-9E04-BF477AF9BBD1}</UniqueIdentifier>
+      <UniqueIdentifier>{A8798D0F-32CC-394E-BDAE-0BEE97DE400B}</UniqueIdentifier>
     </Filter>
     <Filter Include="config">
-      <UniqueIdentifier>{D5B93BCB-DFBD-9D47-8CBA-1479C33FD3CC}</UniqueIdentifier>
+      <UniqueIdentifier>{4412BDA5-ABF0-C843-9EDA-87F07E7C5C38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{B2438C8C-ADCB-6D4E-B879-0A81464D17E8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\resource">
+      <UniqueIdentifier>{BD2FF09B-A194-E44E-B6FA-DCC70D553635}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -24,13 +30,13 @@
     <None Include="..\..\..\data\config\font_gamegirl.ini">
       <Filter>config</Filter>
     </None>
-    <None Include="..\..\..\data\config\ld44.ini">
+    <None Include="..\..\..\data\config\lifetris.ini">
       <Filter>config</Filter>
     </None>
-    <None Include="..\..\..\data\config\ld44d.ini">
+    <None Include="..\..\..\data\config\lifetrisd.ini">
       <Filter>config</Filter>
     </None>
-    <None Include="..\..\..\data\config\ld44p.ini">
+    <None Include="..\..\..\data\config\lifetrisp.ini">
       <Filter>config</Filter>
     </None>
     <None Include="..\..\..\data\config\SettingsTemplate.ini">
@@ -70,5 +76,10 @@
     <ClCompile Include="..\..\..\src\tetro.cpp">
       <Filter>src</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\data\resource\ld44.rc">
+      <Filter>data\resource</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

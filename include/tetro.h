@@ -21,7 +21,8 @@ public:
   void                    Land();
   orxBOOL                 Move(const orxVECTOR &_rvPos, orxS32 _s32Rotation);
 
-  orxS32                  s32Rotation;
+  orxS32                  ms32Rotation;
+  orxU32                  mu32ID;
 };
 
 class Block : public ScrollObject
@@ -29,6 +30,10 @@ class Block : public ScrollObject
 private:
   void                    OnCreate() {}
   void                    OnDelete() {}
+
+
+public:
+  orxU32                  mu32ID;
 };
 
 #endif // __TETRO_H__

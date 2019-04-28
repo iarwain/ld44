@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{B1ADE776-6310-0040-8AB2-4F6D805F97F9}</ProjectGuid>
+    <ProjectGuid>{B6746FAA-57EF-D240-9FA7-975702DA789C}</ProjectGuid>
     <RootNamespace>ld44</RootNamespace>
     <Keyword>Win32Proj</Keyword>
   </PropertyGroup>
@@ -387,12 +387,15 @@
     <None Include="..\..\..\data\config\CreationTemplate.ini" />
     <None Include="..\..\..\data\config\dev.ini" />
     <None Include="..\..\..\data\config\font_gamegirl.ini" />
-    <None Include="..\..\..\data\config\ld44.ini" />
-    <None Include="..\..\..\data\config\ld44d.ini" />
-    <None Include="..\..\..\data\config\ld44p.ini" />
+    <None Include="..\..\..\data\config\lifetris.ini" />
+    <None Include="..\..\..\data\config\lifetrisd.ini" />
+    <None Include="..\..\..\data\config\lifetrisp.ini" />
     <None Include="..\..\..\data\config\SettingsTemplate.ini" />
     <None Include="..\..\..\data\config\sound.ini" />
     <None Include="..\..\..\data\config\tetro.ini" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\data\resource\ld44.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

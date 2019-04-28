@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ld44", "ld44.vcxproj", "{B1ADE776-6310-0040-8AB2-4F6D805F97F9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ld44", "ld44.vcxproj", "{B6746FAA-57EF-D240-9FA7-975702DA789C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,18 +13,18 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Debug|x64.ActiveCfg = Debug|x64
-		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Debug|x64.Build.0 = Debug|x64
-		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Debug|Win32.ActiveCfg = Debug|Win32
-		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Debug|Win32.Build.0 = Debug|Win32
-		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Profile|x64.ActiveCfg = Profile|x64
-		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Profile|x64.Build.0 = Profile|x64
-		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Profile|Win32.ActiveCfg = Profile|Win32
-		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Profile|Win32.Build.0 = Profile|Win32
-		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Release|x64.ActiveCfg = Release|x64
-		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Release|x64.Build.0 = Release|x64
-		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Release|Win32.ActiveCfg = Release|Win32
-		{B1ADE776-6310-0040-8AB2-4F6D805F97F9}.Release|Win32.Build.0 = Release|Win32
+		{B6746FAA-57EF-D240-9FA7-975702DA789C}.Debug|x64.ActiveCfg = Debug|x64
+		{B6746FAA-57EF-D240-9FA7-975702DA789C}.Debug|x64.Build.0 = Debug|x64
+		{B6746FAA-57EF-D240-9FA7-975702DA789C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B6746FAA-57EF-D240-9FA7-975702DA789C}.Debug|Win32.Build.0 = Debug|Win32
+		{B6746FAA-57EF-D240-9FA7-975702DA789C}.Profile|x64.ActiveCfg = Profile|x64
+		{B6746FAA-57EF-D240-9FA7-975702DA789C}.Profile|x64.Build.0 = Profile|x64
+		{B6746FAA-57EF-D240-9FA7-975702DA789C}.Profile|Win32.ActiveCfg = Profile|Win32
+		{B6746FAA-57EF-D240-9FA7-975702DA789C}.Profile|Win32.Build.0 = Profile|Win32
+		{B6746FAA-57EF-D240-9FA7-975702DA789C}.Release|x64.ActiveCfg = Release|x64
+		{B6746FAA-57EF-D240-9FA7-975702DA789C}.Release|x64.Build.0 = Release|x64
+		{B6746FAA-57EF-D240-9FA7-975702DA789C}.Release|Win32.ActiveCfg = Release|Win32
+		{B6746FAA-57EF-D240-9FA7-975702DA789C}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
