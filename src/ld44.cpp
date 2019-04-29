@@ -11,7 +11,7 @@ static orxBOOL sbSplash   = orxTRUE;
 
 orxSTATUS LD44::Bootstrap() const
 {
-  // Adds a config storage to find the initial config file
+  orxResource_AddStorage(orxCONFIG_KZ_RESOURCE_GROUP, "data/config", orxFALSE);
   orxResource_AddStorage(orxCONFIG_KZ_RESOURCE_GROUP, "../data/config", orxFALSE);
 
   // Done!
