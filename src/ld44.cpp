@@ -6,13 +6,19 @@
 #include "ld44.h"
 #undef __SCROLL_IMPL__
 
-static orxBOOL sbRestart  = orxTRUE;
-static orxBOOL sbSplash   = orxTRUE;
+static orxBOOL sbRestart    = orxTRUE;
+static orxBOOL sbDecoration = orxFALSE;
+static orxBOOL sbSplash     = orxTRUE;
 
 orxSTATUS LD44::Bootstrap() const
 {
   orxResource_AddStorage(orxCONFIG_KZ_RESOURCE_GROUP, "data/config", orxFALSE);
   orxResource_AddStorage(orxCONFIG_KZ_RESOURCE_GROUP, "../data/config", orxFALSE);
+
+  // Updates decoration
+  orxConfig_PushSection("Display");
+  orxConfig_SetBool("Decoration", sbDecoration);
+  orxConfig_PopSection();
 
   // Done!
   return orxSTATUS_SUCCESS;
@@ -259,10 +265,9 @@ orxBOOL LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo, orxU32 _u32ID)
     s32Rotation = mastGames[_u32ID].poSelection->ms32Rotation;
 
     // Moves it
-    mastGames[_u32ID].poSelection->Move(orxVECTOR_0, orxInput_IsActive(GetGameInput("RotateCW", _u32ID)) ? 1 : -1);
-
-    // Changed?
-    if(mastGames[_u32ID].poSelection->ms32Rotation != s32Rotation)
+    if(mastGames[_u32ID].poSelection->Move(orxVECTOR_0, orxInput_IsActive(GetGameInput("RotateCW", _u32ID)) ? 1 : -1)
+    || mastGames[_u32ID].poSelection->Move({-orxFLOAT_1, orxFLOAT_0, orxFLOAT_0}, orxInput_IsActive(GetGameInput("RotateCW", _u32ID)) ? 1 : -1)
+    || mastGames[_u32ID].poSelection->Move({orxFLOAT_1, orxFLOAT_0, orxFLOAT_0}, orxInput_IsActive(GetGameInput("RotateCW", _u32ID)) ? 1 : -1))
     {
       // Creates rotate event object
       CreateObject("RotateEvent");
@@ -430,7 +435,10 @@ orxSTATUS LD44::Run()
   if(orxInput_IsActive("Quit"))
   {
     // Updates restart status
-    sbRestart = orxInput_IsActive("Reset");
+    sbRestart = orxInput_HasBeenActivated("Reset");
+
+    // Toggles decoration
+    sbDecoration = !sbDecoration;
 
     // Updates result
     eResult = orxSTATUS_FAILURE;
