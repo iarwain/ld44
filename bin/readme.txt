@@ -60,7 +60,9 @@ success.wav by grunz
 219405__darkadders__cherno-alpha-distortion.wav by darkadders
 275447__robinhood76__05876-trailer-hit-psyche.wav by Robinhood76
 162473__kastenfrosch__successful.mp3 by Kastenfrosch
+68737__mikaelfernstrom__unlockingbedroomdoor.wav by mikaelfernstrom
 
+-------------------------------------------------
 Game powered by Orx Engine
 http://orx-project.org/
 
