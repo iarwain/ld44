@@ -267,7 +267,9 @@ orxBOOL LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo, orxU32 _u32ID)
     // Moves it
     if(mastGames[_u32ID].poSelection->Move(orxVECTOR_0, orxInput_IsActive(GetGameInput("RotateCW", _u32ID)) ? 1 : -1)
     || mastGames[_u32ID].poSelection->Move({-orxFLOAT_1, orxFLOAT_0, orxFLOAT_0}, orxInput_IsActive(GetGameInput("RotateCW", _u32ID)) ? 1 : -1)
-    || mastGames[_u32ID].poSelection->Move({orxFLOAT_1, orxFLOAT_0, orxFLOAT_0}, orxInput_IsActive(GetGameInput("RotateCW", _u32ID)) ? 1 : -1))
+    || mastGames[_u32ID].poSelection->Move({orx2F(-2.0), orxFLOAT_0, orxFLOAT_0}, orxInput_IsActive(GetGameInput("RotateCW", _u32ID)) ? 1 : -1)
+    || mastGames[_u32ID].poSelection->Move({orxFLOAT_1, orxFLOAT_0, orxFLOAT_0}, orxInput_IsActive(GetGameInput("RotateCW", _u32ID)) ? 1 : -1)
+    || mastGames[_u32ID].poSelection->Move({orx2F(2.0), orxFLOAT_0, orxFLOAT_0}, orxInput_IsActive(GetGameInput("RotateCW", _u32ID)) ? 1 : -1))
     {
       // Creates rotate event object
       CreateObject("RotateEvent");
@@ -593,8 +595,24 @@ orxBOOL LD44::AddLine(orxS32 _s32Line, orxU32 _u32ID)
   // Gets selection GUID
   u64GUID = mastGames[_u32ID].poSelection ? mastGames[_u32ID].poSelection->GetGUID() : 0;
 
+  // For all columns
+  for(orxS32 i = 0; i < ms32GridWidth; i++)
+  {
+    orxU64 u64BlockID;
+
+    // Gets its block ID on top line
+    u64BlockID = GetGridValue(i, 0, _u32ID);
+
+    // Is a block?
+    if((u64BlockID != 0) && (u64BlockID != u64GUID))
+    {
+      // Stops
+      return orxFALSE;
+    }
+  }
+
   // For all lines above added one
-  for(orxS32 i = 1; i < _s32Line; i++)
+  for(orxS32 i = 0; i < _s32Line; i++)
   {
     // For all columns
     for(orxS32 j = 0; j < ms32GridWidth; j++)
@@ -671,23 +689,6 @@ orxBOOL LD44::AddLine(orxS32 _s32Line, orxU32 _u32ID)
     // Try to move it up
     orxVector_Set(&vUp, orxFLOAT_0, -orxFLOAT_1, orxFLOAT_0);
     bResult = mastGames[_u32ID].poSelection->Move(vUp, 0);
-  }
-
-  // For all columns
-  for(orxS32 i = 0; i < ms32GridWidth; i++)
-  {
-    orxU64 u64BlockID;
-
-    // Gets its block ID on top line
-    u64BlockID = GetGridValue(i, 0, _u32ID);
-
-    // Is a block?
-    if((u64BlockID != 0) && (u64BlockID != u64GUID))
-    {
-      // Stops
-      bResult = orxFALSE;
-      break;
-    }
   }
 
   // Done!
