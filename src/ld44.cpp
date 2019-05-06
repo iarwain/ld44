@@ -266,10 +266,10 @@ orxBOOL LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo, orxU32 _u32ID)
 
     // Moves it
     if(mastGames[_u32ID].poSelection->Move(orxVECTOR_0, orxInput_IsActive(GetGameInput("RotateCW", _u32ID)) ? 1 : -1)
-    || mastGames[_u32ID].poSelection->Move({-orxFLOAT_1, orxFLOAT_0, orxFLOAT_0}, orxInput_IsActive(GetGameInput("RotateCW", _u32ID)) ? 1 : -1)
-    || mastGames[_u32ID].poSelection->Move({orx2F(-2.0), orxFLOAT_0, orxFLOAT_0}, orxInput_IsActive(GetGameInput("RotateCW", _u32ID)) ? 1 : -1)
-    || mastGames[_u32ID].poSelection->Move({orxFLOAT_1, orxFLOAT_0, orxFLOAT_0}, orxInput_IsActive(GetGameInput("RotateCW", _u32ID)) ? 1 : -1)
-    || mastGames[_u32ID].poSelection->Move({orx2F(2.0), orxFLOAT_0, orxFLOAT_0}, orxInput_IsActive(GetGameInput("RotateCW", _u32ID)) ? 1 : -1))
+    || mastGames[_u32ID].poSelection->Move((orxVECTOR){-orxFLOAT_1, orxFLOAT_0, orxFLOAT_0}, orxInput_IsActive(GetGameInput("RotateCW", _u32ID)) ? 1 : -1)
+    || mastGames[_u32ID].poSelection->Move((orxVECTOR){orx2F(-2.0), orxFLOAT_0, orxFLOAT_0}, orxInput_IsActive(GetGameInput("RotateCW", _u32ID)) ? 1 : -1)
+    || mastGames[_u32ID].poSelection->Move((orxVECTOR){orxFLOAT_1, orxFLOAT_0, orxFLOAT_0}, orxInput_IsActive(GetGameInput("RotateCW", _u32ID)) ? 1 : -1)
+    || mastGames[_u32ID].poSelection->Move((orxVECTOR){orx2F(2.0), orxFLOAT_0, orxFLOAT_0}, orxInput_IsActive(GetGameInput("RotateCW", _u32ID)) ? 1 : -1))
     {
       // Creates rotate event object
       CreateObject("RotateEvent");
