@@ -47,6 +47,9 @@ private:
                 void            Update(const orxCLOCK_INFO &_rstInfo);
                 orxBOOL         UpdateGame(const orxCLOCK_INFO &_rstInfo, orxU32 _u32ID);
 
+                void            LoadHighScores();
+                void            SaveHighScores() const;
+
                 orxSTATUS       Init();
                 orxSTATUS       Run();
                 void            Exit();
@@ -57,6 +60,7 @@ private:
 
 private:
   static const  orxU32          su32MaxPlayer = 2;
+  static const  orxU32          su32MaxHighScore = 10;
                 orxVECTOR       mvBlockSize;
                 GameState       meGameState;
                 orxS32          ms32GridWidth, ms32GridHeight;
@@ -69,6 +73,11 @@ private:
                   orxFLOAT        fFallTime;
                   orxFLOAT        fLeftTime, fRightTime;
                 }mastGames[su32MaxPlayer];
+
+                struct HighScore {
+                  orxU32          u32Score;
+                  orxCHAR         acName[4];
+                } mastHighScores[su32MaxHighScore];
 };
 
 #endif // __LD44_H_

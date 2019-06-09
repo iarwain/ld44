@@ -380,6 +380,84 @@ orxBOOL LD44::UpdateGame(const orxCLOCK_INFO &_rstInfo, orxU32 _u32ID)
   return orxTRUE;
 }
 
+void LD44::LoadHighScores()
+{
+  const orxSTRING zSaveFile;
+
+  // Clears high scores
+  orxMemory_Zero(mastHighScores, sizeof(mastHighScores));
+
+  // Gets save file
+  zSaveFile = orxFile_GetApplicationSaveDirectory("Lifetris/Lifetris.sav");
+
+  // Loads it
+  if(orxConfig_Load(zSaveFile) != orxSTATUS_FAILURE)
+  {
+    // Pushes HighScore section
+    orxConfig_PushSection("HighScore");
+
+    // For all entries
+    for(orxU32 i = 0, iCount = orxConfig_GetListCount("Scores"); i < iCount; i++)
+    {
+      // Loads it
+      mastHighScores[i].u32Score = orxConfig_GetListU32("Scores", i);
+      orxString_NPrint(mastHighScores[i].acName, sizeof(mastHighScores[i].acName), orxConfig_GetListString("Names", i));
+    }
+
+    // Pops config section
+    orxConfig_PopSection();
+  }
+}
+
+static orxBOOL orxFASTCALL HighScoreSaveCallback(const orxSTRING _zSectionName, const orxSTRING _zKeyName, const orxSTRING _zFileName, orxBOOL _bUseEncryption)
+{
+  // Saves HighScore section
+  return orxString_Compare(_zSectionName, "HighScore") == 0;
+}
+
+void LD44::SaveHighScores() const
+{
+  const orxSTRING zSaveFile;
+
+  // Clears HighScore section
+  orxConfig_ClearSection("HighScore");
+
+  // Pushes HighScore section
+  orxConfig_PushSection("HighScore");
+
+  // For all entries
+  for(orxU32 i = 0; i < orxARRAY_GET_ITEM_COUNT(mastHighScores); i++)
+  {
+    // Valid?
+    if(mastHighScores[i].u32Score != 0)
+    {
+      orxCHAR acScore[16] = {};
+      const orxSTRING azDummy[1];
+
+      // Stores it
+      azDummy[0] = mastHighScores[i].acName;
+      orxConfig_AppendListString("Names", azDummy, 1);
+      orxString_NPrint(acScore, sizeof(acScore), "%u", mastHighScores[i].u32Score);
+      azDummy[0] = acScore;
+      orxConfig_AppendListString("Scores", azDummy, 1);
+    }
+    else
+    {
+      // Stops
+      break;
+    }
+  }
+
+  // Pops config section
+  orxConfig_PopSection();
+
+  // Gets save file
+  zSaveFile = orxFile_GetApplicationSaveDirectory("Lifetris/Lifetris.sav");
+
+  // Save high scores
+  orxConfig_Save(zSaveFile, orxTRUE, &HighScoreSaveCallback);
+}
+
 orxSTATUS LD44::Init()
 {
   orxVECTOR vGridSize;
@@ -388,6 +466,9 @@ orxSTATUS LD44::Init()
 
   // Inits random
   orxMath_InitRandom((orxU32)orxSystem_GetRealTime());
+
+  // Loads high scores
+  LoadHighScores();
 
   // Creates the viewports
   for(orxS32 i = 0; i < orxConfig_GetListCount("ViewportList"); i++)
@@ -454,6 +535,9 @@ orxSTATUS LD44::Run()
 
 void LD44::Exit()
 {
+  // Save high scores
+  SaveHighScores();
+
   // Deletes all objects
   for(ScrollObject *poObject = GetNextObject();
       poObject;
