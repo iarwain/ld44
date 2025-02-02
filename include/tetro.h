@@ -2,7 +2,7 @@
 #define __TETRO_H__
 
 //! Includes
-#include "Scroll.h"
+#include "Scroll/Scroll.h"
 
 class Tetro : public ScrollObject
 {

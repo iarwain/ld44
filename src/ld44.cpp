@@ -6,14 +6,24 @@
 #include "ld44.h"
 #undef __SCROLL_IMPL__
 
+#include "orxExtensions.h"
+
+#ifdef __orxMSVC__
+
+/* Requesting high performance dedicated GPU on hybrid laptops */
+__declspec(dllexport) unsigned long NvOptimusEnablement        = 1;
+__declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
+
+#endif // __orxMSVC__
+
 static orxBOOL sbRestart    = orxTRUE;
 static orxBOOL sbDecoration = orxFALSE;
 static orxBOOL sbSplash     = orxTRUE;
 
 orxSTATUS LD44::Bootstrap() const
 {
-  orxResource_AddStorage(orxCONFIG_KZ_RESOURCE_GROUP, "data/config", orxFALSE);
-  orxResource_AddStorage(orxCONFIG_KZ_RESOURCE_GROUP, "../data/config", orxFALSE);
+  // Bootstrap extensions
+  BootstrapExtensions();
 
   // Updates decoration
   orxConfig_PushSection("Display");
@@ -112,6 +122,7 @@ void LD44::Update(const orxCLOCK_INFO &_rstInfo)
       break;
     }
 
+    default:
     case GameStatePause:
     {
       break;
@@ -462,6 +473,9 @@ orxSTATUS LD44::Init()
 {
   orxVECTOR vGridSize;
 
+  // Init extensions
+  InitExtensions();
+
   orxConfig_PushSection("Game");
 
   // Inits random
@@ -553,6 +567,9 @@ void LD44::Exit()
     orxMemory_Free(mastGames[i].au64Grid);
     mastGames[i].au64Grid = orxNULL;
   }
+
+  // Exit from extensions
+  ExitExtensions();
 }
 
 void LD44::BindObjects()
@@ -673,10 +690,10 @@ void LD44::DumpGrid(orxU32 _u32ID)
 
 orxBOOL LD44::AddLine(orxS32 _s32Line, orxU32 _u32ID)
 {
-  orxU64  u64GUID;
-  orxS32  s32Hole;
-  orxU32  u32GroupID;
-  orxBOOL bResult = orxTRUE;
+  orxU64      u64GUID;
+  orxSTRINGID stGroupID;
+  orxS32      s32Hole;
+  orxBOOL     bResult = orxTRUE;
 
   // Gets selection GUID
   u64GUID = mastGames[_u32ID].poSelection ? mastGames[_u32ID].poSelection->GetGUID() : 0;
@@ -738,7 +755,7 @@ orxBOOL LD44::AddLine(orxS32 _s32Line, orxU32 _u32ID)
   orxConfig_SetU32("GameID", _u32ID);
   orxConfig_PopSection();
   orxConfig_PushSection("Game");
-  u32GroupID = orxString_ToCRC(orxConfig_GetListString("GroupList", _u32ID));
+  stGroupID = orxString_Hash(orxConfig_GetListString("GroupList", _u32ID));
   orxConfig_PopSection();
 
   // For all columns (added line)
@@ -756,7 +773,7 @@ orxBOOL LD44::AddLine(orxS32 _s32Line, orxU32 _u32ID)
       // Adds new block
       poBlock = LD44::GetInstance().CreateObject<Block>("TetroBlock");
       poBlock->SetPosition(vPos, orxTRUE);
-      poBlock->SetGroupID(u32GroupID);
+      poBlock->SetGroupID(stGroupID);
       poBlock->mu32ID = _u32ID;
       SetGridValue(j, _s32Line, poBlock->GetGUID(), _u32ID);
     }

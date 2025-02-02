@@ -4,12 +4,12 @@
 //! Code
 void Tetro::OnCreate()
 {
-  orxVECTOR vOffset, vPos;
-  orxU32    u32GroupID;
+  orxVECTOR   vOffset, vPos;
+  orxSTRINGID stGroupID;
 
   // Sets as current tetromino
   orxConfig_PushSection("Runtime");
-  orxConfig_SetString("Tetro", GetModelName());
+  orxConfig_SetString("Tetro", GetName());
   mu32ID = orxConfig_GetU32("GameID");
   orxConfig_PopSection();
 
@@ -41,8 +41,8 @@ void Tetro::OnCreate()
 
   // Sets group
   orxConfig_PushSection("Game");
-  u32GroupID = orxString_ToCRC(orxConfig_GetListString("GroupList", mu32ID));
-  SetGroupID(u32GroupID);
+  stGroupID = orxString_Hash(orxConfig_GetListString("GroupList", mu32ID));
+  SetGroupID(stGroupID);
   orxConfig_PopSection();
 
   // Sets rotation
@@ -77,7 +77,7 @@ void Tetro::Land()
   orxS32          s32LandScore;
 
   // Removes all children
-  while(poChild = GetOwnedChild())
+  while((poChild = GetOwnedChild()))
   {
     orxObject_SetOwner(poChild->GetOrxObject(), orxNULL);
   }
@@ -225,7 +225,7 @@ orxBOOL Tetro::Move(const orxVECTOR &_rvPos, orxS32 _s32Rotation)
   Transform(_rvPos, _s32Rotation);
 
   // Valid?
-  if(bResult = IsValid())
+  if((bResult = IsValid()))
   {
     // Validate
     Validate();

@@ -1,6 +1,6 @@
 /* Scroll
  *
- * Copyright (c) 2008-2014 Orx-Project
+ * Copyright (c) 2008- Orx-Project
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -29,10 +29,6 @@
 //! Includes
 #include "ScrollBase.h"
 
-#ifndef __NO_SCROLLED__
-  #include "ScrollEd.h"
-#endif // __NO_SCROLLED__
-
 
 //! Scroll template class
 template<class G>
@@ -43,14 +39,9 @@ public:
   static        G &             GetInstance();
                 void            Execute(int argc, char **argv);
 
-                ScrollObject *  CreateObject(const orxSTRING _zModelName)   {return ScrollBase::CreateObject(_zModelName, ScrollObject::FlagRunTime);}
-          template<class O> O * CreateObject(const orxSTRING _zModelName)   {return ScrollCast<O *>(CreateObject(_zModelName));}
+                ScrollObject *  CreateObject(const orxSTRING _zName)        {return ScrollBase::CreateObject(_zName);}
+          template<class O> O * CreateObject(const orxSTRING _zName)        {return ScrollCast<O *>(CreateObject(_zName));}
                 void            DeleteObject(ScrollObject *_poObject)       {ScrollBase::DeleteObject(_poObject);}
-
-                orxSTATUS       SetMapName(const orxSTRING _zMapName);
-          const orxSTRING       GetMapName() const;
-          const orxSTRING       GetMapShortName() const;
-                orxSTATUS       LoadMap();
 
 
 protected:
@@ -66,16 +57,10 @@ private:
   virtual       void            Exit()                                      {}
   virtual       void            Update(const orxCLOCK_INFO &_rstInfo)       {}
   virtual       void            CameraUpdate(const orxCLOCK_INFO &_rstInfo) {}
-  virtual       orxBOOL         MapSaveFilter(const orxSTRING _zSectionName,
-                                              const orxSTRING _zKeyName,
-                                              const orxSTRING _zFileName,
-                                              orxBOOL _bUseEncryption)      {return orxFALSE;}
   virtual       void            BindObjects()                               {}
 
   virtual       void            OnObjectCreate(ScrollObject *_poObject)     {}
   virtual       void            OnObjectDelete(ScrollObject *_poObject)     {}
-  virtual       void            OnMapLoad()                                 {}
-  virtual       void            OnMapSave(orxBOOL _bEncrypt)                {}
   virtual       void            OnStartGame()                               {}
   virtual       void            OnStopGame()                                {}
   virtual       void            OnPauseGame(orxBOOL _bPause)                {}
@@ -103,8 +88,28 @@ G &Scroll<G>::GetInstance()
 
 #ifdef __SCROLL_IMPL__
 
-//! Inline include
-#include "Scroll.inl"
+//! Constants
+
+
+//! Code
+template<class G>
+const orxSTRING Scroll<G>::GetEncryptionKey() const
+{
+  return "This is Scroll's default encryption key!";
+}
+
+template<class G>
+orxSTATUS Scroll<G>::Bootstrap() const
+{
+  return orxSTATUS_SUCCESS;
+}
+
+template<class G>
+void Scroll<G>::Execute(int argc, char **argv)
+{
+  // Executes the game
+  ScrollBase::GetInstance().Execute(argc, argv);
+}
 
 #endif // __SCROLL_IMPL__
 

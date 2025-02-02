@@ -2,8 +2,7 @@
 #define __LD44_H_
 
 //! Includes
-#define __NO_SCROLLED__ // Uncomment this define to prevent the embedded editor (ScrollEd) from being compiled
-#include "Scroll.h"
+#include "Scroll/Scroll.h"
 #include "tetro.h"
 
 //! LD44

@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 13.00
+# Visual Studio 2022
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ld44", "ld44.vcxproj", "{6869DA9C-1ABC-BD4D-8756-37C87C56BA5B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|Win32 = Debug|Win32
+		Profile|x64 = Profile|x64
+		Profile|Win32 = Profile|Win32
+		Release|x64 = Release|x64
+		Release|Win32 = Release|Win32
+		Bundle|x64 = Bundle|x64
+		Bundle|Win32 = Bundle|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6869DA9C-1ABC-BD4D-8756-37C87C56BA5B}.Debug|x64.ActiveCfg = Debug|x64
+		{6869DA9C-1ABC-BD4D-8756-37C87C56BA5B}.Debug|x64.Build.0 = Debug|x64
+		{6869DA9C-1ABC-BD4D-8756-37C87C56BA5B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6869DA9C-1ABC-BD4D-8756-37C87C56BA5B}.Debug|Win32.Build.0 = Debug|Win32
+		{6869DA9C-1ABC-BD4D-8756-37C87C56BA5B}.Profile|x64.ActiveCfg = Profile|x64
+		{6869DA9C-1ABC-BD4D-8756-37C87C56BA5B}.Profile|x64.Build.0 = Profile|x64
+		{6869DA9C-1ABC-BD4D-8756-37C87C56BA5B}.Profile|Win32.ActiveCfg = Profile|Win32
+		{6869DA9C-1ABC-BD4D-8756-37C87C56BA5B}.Profile|Win32.Build.0 = Profile|Win32
+		{6869DA9C-1ABC-BD4D-8756-37C87C56BA5B}.Release|x64.ActiveCfg = Release|x64
+		{6869DA9C-1ABC-BD4D-8756-37C87C56BA5B}.Release|x64.Build.0 = Release|x64
+		{6869DA9C-1ABC-BD4D-8756-37C87C56BA5B}.Release|Win32.ActiveCfg = Release|Win32
+		{6869DA9C-1ABC-BD4D-8756-37C87C56BA5B}.Release|Win32.Build.0 = Release|Win32
+		{6869DA9C-1ABC-BD4D-8756-37C87C56BA5B}.Bundle|x64.ActiveCfg = Bundle|x64
+		{6869DA9C-1ABC-BD4D-8756-37C87C56BA5B}.Bundle|x64.Build.0 = Bundle|x64
+		{6869DA9C-1ABC-BD4D-8756-37C87C56BA5B}.Bundle|Win32.ActiveCfg = Bundle|Win32
+		{6869DA9C-1ABC-BD4D-8756-37C87C56BA5B}.Bundle|Win32.Build.0 = Bundle|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
